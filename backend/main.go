@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	standard.CreateTable()
+	standard.CreateRecord()
 }
