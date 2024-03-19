@@ -10,7 +10,6 @@ import (
 	"github.com/apache/arrow/go/arrow/memory"
 )
 
-
 func convertToIPC(record array.Record) []byte {
 
 	buf := new(bytes.Buffer)
@@ -32,7 +31,6 @@ func convertToIPC(record array.Record) []byte {
 	return ipcData
 
 }
-
 
 func CreateTable() {
 
