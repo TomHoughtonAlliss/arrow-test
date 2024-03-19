@@ -24,13 +24,13 @@ writeFileSync("simple.arrow", ipcTable);
 
 function getArrayFromIPC() 
 {
-    const arrow = readFileSync('simple.arrow');
+    const arrow = readFileSync('./backend/output.ipc');
     const table = tableFromIPC(arrow);
     console.table(table.toArray());
 }
 
 
-getArrayFromJSON();
+//getArrayFromJSON();
 getArrayFromIPC();
 
 const byteArray = readFileSync('bytearray.arrow');
@@ -38,4 +38,4 @@ const byteString = String.fromCharCode.apply(null, byteArray);
 const jsonData = JSON.parse(byteString);
 //const tab = tableFromIPC(byteArray);
 //console.table(table.toString());
-console.log(jsonData);
+//console.log(jsonData);
