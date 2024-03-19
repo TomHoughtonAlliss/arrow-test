@@ -3,7 +3,6 @@ package standard
 import (
 	"bytes"
 	"fmt"
-	"io"
 
 	"github.com/apache/arrow/go/arrow"
 	"github.com/apache/arrow/go/arrow/array"
@@ -11,26 +10,29 @@ import (
 	"github.com/apache/arrow/go/arrow/memory"
 )
 
+
 func convertToIPC(record array.Record) []byte {
 
-	buffer := new(bytes.Buffer)
-	byteWriter := io.Writer(buffer)
+	buf := new(bytes.Buffer)
 
-	writer := ipc.NewWriter(byteWriter)
+	writer := ipc.NewWriter(buf, ipc.WithSchema(record.Schema()))
 
-	if err := writer.Write(record); err != nil {
+	err := writer.Write(record)
+	if err != nil {
 		panic(err)
 	}
 
-	if err := writer.Close(); err != nil {
+	err = writer.Close()
+	if err != nil {
 		panic(err)
 	}
 
-	data := buffer.Bytes()
+	ipcData := buf.Bytes()
 
-	return data
+	return ipcData
 
 }
+
 
 func CreateTable() {
 
